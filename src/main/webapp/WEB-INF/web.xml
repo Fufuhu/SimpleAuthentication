@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <security-constraint>
+        <display-name>AuthorizedResource</display-name>
+        <web-resource-collection>
+            <web-resource-name>protected-page</web-resource-name>
+            <description/>
+            <url-pattern>/login/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>認証完了したユーザが参照できるリソース</description>
+            <role-name>admin</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>jdbc-realm</realm-name>
+        <form-login-config>
+            <form-login-page>/login/index.jsp</form-login-page>
+            <form-error-page>/login/error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description/>
+        <role-name>admin</role-name>
+    </security-role>
+</web-app>
